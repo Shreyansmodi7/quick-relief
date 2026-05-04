@@ -2,7 +2,7 @@ import axios from 'axios';
 import { store } from '../store.js';
 
 const api = axios.create({
-  baseURL: 'http://127.0.0.1:5000/api', // Adjust in production
+  baseURL: 'http://127.0.0.1:5555/api', // Adjust in production
   headers: {
     'Content-Type': 'application/json',
   },

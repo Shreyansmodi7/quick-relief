@@ -29,8 +29,8 @@ export const addOrderItems = async (req, res) => {
     prescriptionImage
   } = req.body;
 
-  if (orderItems && orderItems.length === 0) {
-    res.status(400).json({ message: 'No order items' });
+  if (orderItems && orderItems.length === 0 && !prescriptionImage) {
+    res.status(400).json({ message: 'No order items and no prescription provided' });
     return;
   }
 

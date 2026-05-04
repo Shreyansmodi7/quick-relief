@@ -8,6 +8,7 @@ import MedicinesPage from './pages/MedicinesPage.jsx';
 import CartPage from './pages/CartPage.jsx';
 import CheckoutPage from './pages/CheckoutPage.jsx';
 import PharmacistDashboard from './pages/PharmacistDashboard.jsx';
+import UploadPrescriptionPage from './pages/UploadPrescriptionPage.jsx';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/medicines" element={<MedicinesPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/upload-prescription" element={<UploadPrescriptionPage />} />
             <Route path="/pharmacist/dashboard" element={<PharmacistDashboard />} />
           </Routes>
         </main>

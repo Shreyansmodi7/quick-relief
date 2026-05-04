@@ -115,7 +115,7 @@ const PharmacistDashboard = () => {
                     </td>
                     <td className="p-4 text-sm">
                       {order.prescriptionImage ? (
-                        <a href={`http://localhost:5000${order.prescriptionImage}`} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-primary-600 hover:underline">
+                        <a href={`http://127.0.0.1:5555${order.prescriptionImage}`} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-primary-600 hover:underline">
                           <FileText size={16} /> View Rx
                         </a>
                       ) : (

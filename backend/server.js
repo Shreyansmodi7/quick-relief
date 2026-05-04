@@ -8,7 +8,7 @@ import path from 'path';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5555;
 
 // Middleware
 app.use(cors());
@@ -41,8 +41,10 @@ const seedData = async () => {
       { name: 'Vaseline Intensive Care Body Lotion', description: 'Body Care', price: 9.00, discount: 65, image: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=300&q=80', category: 'Personal Care', subCategory: 'Body Care', inStock: true, manufacturer: 'Vaseline' },
       
       // --- ESSENTIALS ---
-      { name: 'Paracetamol 500mg', description: 'Pain Relief', price: 5.99, discount: 10, image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=300&q=80', category: 'General', subCategory: 'Pain Relief', inStock: true, manufacturer: 'HealthPharm', requiresPrescription: false },
-      { name: 'Amoxicillin 250mg', description: 'Antibiotic', price: 12.50, discount: 5, image: 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=300&q=80', category: 'General', subCategory: 'Antibiotics', inStock: true, manufacturer: 'BioCare', requiresPrescription: true },
+      { name: 'Digital Thermometer', description: 'Fast and accurate temperature reading.', price: 4.99, discount: 15, image: 'http://127.0.0.1:5555/uploads/thermometer.jpg', category: 'Daily Essentials', subCategory: 'Medical Devices', inStock: true, manufacturer: 'HealthPlus' },
+      { name: 'Pyregem Paracetamol', description: 'Quick pain and fever relief.', price: 2.50, discount: 5, image: 'http://127.0.0.1:5555/uploads/paracetamol.jpg', category: 'Daily Essentials', subCategory: 'Pain Relief', inStock: true, manufacturer: 'Pyregem' },
+      { name: 'Amrutanjan Strong Balm', description: 'Double power pain relief balm.', price: 1.99, discount: 10, image: 'http://127.0.0.1:5555/uploads/balm.jpg', category: 'Daily Essentials', subCategory: 'Pain Relief', inStock: true, manufacturer: 'Amrutanjan' },
+      { name: 'Bella Classic Pads', description: 'Comfortable menstrual pads, 2+1 Free.', price: 6.99, discount: 20, image: 'http://127.0.0.1:5555/uploads/pads.jpg', category: 'Daily Essentials', subCategory: 'Feminine Hygiene', inStock: true, manufacturer: 'Bella' },
     ]);
     console.log('Mock medicines seeded successfully.');
   }

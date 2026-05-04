@@ -110,7 +110,7 @@ const HomePage = () => {
             ))}
           </div>
         ) : (
-          ['Homeopathy', 'Personal Care'].map(categoryName => {
+          ['Homeopathy', 'Personal Care', 'Daily Essentials'].map(categoryName => {
             const categoryMedicines = medicines.filter(m => m.category === categoryName);
             if (categoryMedicines.length === 0) return null;
 

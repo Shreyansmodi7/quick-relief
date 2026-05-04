@@ -14,14 +14,19 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const { userInfo } = useSelector((state) => state.auth);
+  
+  const searchParams = new URLSearchParams(window.location.search);
+  const redirect = searchParams.get('redirect') || '/';
 
   useEffect(() => {
     if (userInfo) {
-      if (userInfo.role === 'admin') navigate('/admin/dashboard');
+      if (redirect !== '/') {
+        navigate(redirect);
+      } else if (userInfo.role === 'admin') navigate('/admin/dashboard');
       else if (userInfo.role === 'pharmacist') navigate('/pharmacist/dashboard');
       else navigate('/');
     }
-  }, [navigate, userInfo]);
+  }, [navigate, userInfo, redirect]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -30,7 +35,7 @@ const LoginPage = () => {
     try {
       const { data } = await api.post('/auth/login', { email, password });
       dispatch(setCredentials(data));
-      navigate('/');
+      navigate(redirect);
     } catch (err) {
       setError(err.response?.data?.message || err.message);
     } finally {
