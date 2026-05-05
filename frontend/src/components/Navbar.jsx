@@ -37,6 +37,11 @@ const Navbar = () => {
             <Link to="/medicines" className="text-gray-600 hover:text-primary-600 font-medium transition-colors hidden md:block">
               Medicines
             </Link>
+            {userInfo?.role === 'delivery' && (
+              <Link to="/delivery/dashboard" className="text-gray-600 hover:text-primary-600 font-medium transition-colors hidden md:block">
+                Delivery Requests
+              </Link>
+            )}
 
             <Link to="/cart" className="relative text-gray-600 hover:text-primary-600 transition-colors">
               <ShoppingCart size={24} />
@@ -59,6 +64,9 @@ const Navbar = () => {
                   )}
                   {userInfo.role === 'pharmacist' && (
                     <Link to="/pharmacist/dashboard" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Pharmacist Dashboard</Link>
+                  )}
+                  {userInfo.role === 'delivery' && (
+                    <Link to="/delivery/dashboard" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Delivery Requests</Link>
                   )}
                   <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Profile</Link>
                   <button onClick={logoutHandler} className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-50 flex items-center gap-2">

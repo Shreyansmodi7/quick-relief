@@ -136,7 +136,9 @@ export const getOrders = async (req, res) => {
 // @route   GET /api/orders/deliveries/available
 // @access  Private/Delivery
 export const getAvailableDeliveries = async (req, res) => {
-  const orders = await Order.find({ status: 'Ready for Pickup' }).populate('user', 'name');
+  const orders = await Order.find({ status: 'Ready for Pickup' })
+    .populate('user', 'name')
+    .populate('pharmacist', 'name email');
   res.json(orders);
 };
 
@@ -144,7 +146,9 @@ export const getAvailableDeliveries = async (req, res) => {
 // @route   GET /api/orders/deliveries/my-deliveries
 // @access  Private/Delivery
 export const getMyDeliveries = async (req, res) => {
-  const orders = await Order.find({ deliveryPartner: req.user._id }).populate('user', 'name');
+  const orders = await Order.find({ deliveryPartner: req.user._id })
+    .populate('user', 'name')
+    .populate('pharmacist', 'name email');
   res.json(orders);
 };
 

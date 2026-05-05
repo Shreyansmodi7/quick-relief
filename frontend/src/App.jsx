@@ -9,7 +9,7 @@ import CartPage from './pages/CartPage.jsx';
 import CheckoutPage from './pages/CheckoutPage.jsx';
 import PharmacistDashboard from './pages/PharmacistDashboard.jsx';
 import UploadPrescriptionPage from './pages/UploadPrescriptionPage.jsx';
-import DeliveryDashboard from './pages/DeliveryDashboard.jsx';
+import DeliveryOrdersPage from './pages/DeliveryOrdersPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 
 function App() {
@@ -27,7 +27,8 @@ function App() {
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/upload-prescription" element={<UploadPrescriptionPage />} />
             <Route path="/pharmacist/dashboard" element={<PharmacistDashboard />} />
-            <Route path="/delivery/dashboard" element={<DeliveryDashboard />} />
+            <Route path="/delivery/dashboard" element={<DeliveryOrdersPage />} />
+            <Route path="/delivery/orders" element={<DeliveryOrdersPage />} />
             <Route path="/profile" element={<ProfilePage />} />
           </Routes>
         </main>
