@@ -131,3 +131,77 @@ export const getOrders = async (req, res) => {
   const orders = await Order.find({}).populate('user', 'id name');
   res.json(orders);
 };
+
+// @desc    Get available deliveries for drivers
+// @route   GET /api/orders/deliveries/available
+// @access  Private/Delivery
+export const getAvailableDeliveries = async (req, res) => {
+  const orders = await Order.find({ status: 'Ready for Pickup' }).populate('user', 'name');
+  res.json(orders);
+};
+
+// @desc    Get driver's assigned deliveries
+// @route   GET /api/orders/deliveries/my-deliveries
+// @access  Private/Delivery
+export const getMyDeliveries = async (req, res) => {
+  const orders = await Order.find({ deliveryPartner: req.user._id }).populate('user', 'name');
+  res.json(orders);
+};
+
+// @desc    Accept a delivery
+// @route   PUT /api/orders/:id/accept-delivery
+// @access  Private/Delivery
+export const acceptDelivery = async (req, res) => {
+  const order = await Order.findById(req.params.id);
+  if (order && order.status === 'Ready for Pickup') {
+    order.status = 'Accepted by Driver';
+    order.deliveryPartner = req.user._id;
+    const updatedOrder = await order.save();
+    res.json(updatedOrder);
+  } else {
+    res.status(404).json({ message: 'Order not available for delivery' });
+  }
+};
+
+// @desc    Mark order as delivered by driver
+// @route   PUT /api/orders/:id/deliver
+// @access  Private/Delivery
+export const markAsDelivered = async (req, res) => {
+  const order = await Order.findById(req.params.id);
+  if (order && order.deliveryPartner && order.deliveryPartner.toString() === req.user._id.toString()) {
+    order.status = 'Delivered';
+    order.isDelivered = true;
+    order.deliveredAt = Date.now();
+    order.isPaid = true;
+    order.paidAt = Date.now();
+    const updatedOrder = await order.save();
+    res.json(updatedOrder);
+  } else {
+    res.status(404).json({ message: 'Order not found or unauthorized' });
+  }
+};
+
+// @desc    Cancel an order
+// @route   PUT /api/orders/:id/cancel
+// @access  Private/Customer
+export const cancelOrder = async (req, res) => {
+  const order = await Order.findById(req.params.id);
+
+  if (order) {
+    if (order.user.toString() !== req.user._id.toString()) {
+      res.status(401).json({ message: 'Not authorized to cancel this order' });
+      return;
+    }
+    
+    if (order.status !== 'Pending') {
+      res.status(400).json({ message: 'Order cannot be cancelled once accepted' });
+      return;
+    }
+
+    order.status = 'Cancelled';
+    const updatedOrder = await order.save();
+    res.json(updatedOrder);
+  } else {
+    res.status(404).json({ message: 'Order not found' });
+  }
+};

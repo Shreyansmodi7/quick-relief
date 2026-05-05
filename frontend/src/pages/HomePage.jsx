@@ -50,7 +50,7 @@ const HomePage = () => {
             <Link to="/medicines" className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-full font-medium transition-colors shadow-md text-center">
               Order Now
             </Link>
-            <Link to="/checkout" className="bg-white hover:bg-gray-50 text-primary-600 border border-primary-200 px-6 py-3 rounded-full font-medium transition-colors shadow-sm flex items-center gap-2 justify-center">
+            <Link to="/upload-prescription" className="bg-white hover:bg-gray-50 text-primary-600 border border-primary-200 px-6 py-3 rounded-full font-medium transition-colors shadow-sm flex items-center gap-2 justify-center">
               <FileText size={20} /> Upload Prescription
             </Link>
           </div>

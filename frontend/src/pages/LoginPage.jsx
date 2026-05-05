@@ -24,6 +24,7 @@ const LoginPage = () => {
         navigate(redirect);
       } else if (userInfo.role === 'admin') navigate('/admin/dashboard');
       else if (userInfo.role === 'pharmacist') navigate('/pharmacist/dashboard');
+      else if (userInfo.role === 'delivery') navigate('/delivery/dashboard');
       else navigate('/');
     }
   }, [navigate, userInfo, redirect]);

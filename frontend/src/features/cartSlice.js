@@ -4,6 +4,7 @@ const initialState = {
   cartItems: localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [],
   shippingAddress: localStorage.getItem('shippingAddress') ? JSON.parse(localStorage.getItem('shippingAddress')) : {},
   paymentMethod: localStorage.getItem('paymentMethod') ? JSON.parse(localStorage.getItem('paymentMethod')) : 'Credit Card',
+  prescriptionImage: localStorage.getItem('prescriptionImage') ? JSON.parse(localStorage.getItem('prescriptionImage')) : null,
 };
 
 const updateCart = (state) => {
@@ -39,12 +40,18 @@ const cartSlice = createSlice({
       state.paymentMethod = action.payload;
       localStorage.setItem('paymentMethod', JSON.stringify(action.payload));
     },
+    savePrescriptionImage: (state, action) => {
+      state.prescriptionImage = action.payload;
+      localStorage.setItem('prescriptionImage', JSON.stringify(action.payload));
+    },
     clearCartItems: (state, action) => {
       state.cartItems = [];
+      state.prescriptionImage = null;
+      localStorage.removeItem('prescriptionImage');
       updateCart(state);
     },
   },
 });
 
-export const { addToCart, removeFromCart, saveShippingAddress, savePaymentMethod, clearCartItems } = cartSlice.actions;
+export const { addToCart, removeFromCart, saveShippingAddress, savePaymentMethod, savePrescriptionImage, clearCartItems } = cartSlice.actions;
 export default cartSlice.reducer;

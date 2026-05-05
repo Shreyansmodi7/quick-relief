@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 const orderSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   pharmacist: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, // Assigned later based on location
+  deliveryPartner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   orderItems: [
     {
       medicine: { type: mongoose.Schema.Types.ObjectId, ref: 'Medicine', required: true },
@@ -26,7 +27,7 @@ const orderSchema = new mongoose.Schema({
   prescriptionImage: { type: String }, // URL or local path
   status: {
     type: String,
-    enum: ['Pending', 'Accepted', 'Rejected', 'Out for Delivery', 'Delivered'],
+    enum: ['Pending', 'Accepted', 'Rejected', 'Ready for Pickup', 'Accepted by Driver', 'Out for Delivery', 'Delivered', 'Cancelled'],
     default: 'Pending'
   },
   isPaid: { type: Boolean, required: true, default: false },

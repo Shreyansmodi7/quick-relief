@@ -7,7 +7,7 @@ import { Upload, CheckCircle, MapPin, CreditCard, Wallet, Truck } from 'lucide-r
 
 const CheckoutPage = () => {
   const cart = useSelector((state) => state.cart);
-  const { cartItems, shippingAddress, paymentMethod } = cart;
+  const { cartItems, shippingAddress, paymentMethod, prescriptionImage } = cart;
   const { userInfo } = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const CheckoutPage = () => {
   
   const [payment, setPayment] = useState(paymentMethod || 'Credit Card');
   
-  const [prescriptionFile, setPrescriptionFile] = useState(null);
+  const [prescriptionFile, setPrescriptionFile] = useState(prescriptionImage || null);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
   
@@ -33,10 +33,10 @@ const CheckoutPage = () => {
     if (!userInfo) {
       navigate('/login?redirect=/checkout');
     }
-    if (cartItems.length === 0) {
+    if (cartItems.length === 0 && !prescriptionImage) {
       navigate('/cart');
     }
-  }, [userInfo, navigate, cartItems]);
+  }, [userInfo, navigate, cartItems, prescriptionImage]);
 
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
@@ -48,6 +48,7 @@ const CheckoutPage = () => {
       const config = { headers: { 'Content-Type': 'multipart/form-data' } };
       const { data } = await api.post('/upload', formData, config);
       setPrescriptionFile(data.image);
+      dispatch({ type: 'cart/savePrescriptionImage', payload: data.image });
       setUploading(false);
     } catch (err) {
       console.error(err);

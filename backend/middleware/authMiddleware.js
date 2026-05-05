@@ -14,6 +14,11 @@ export const protect = async (req, res, next) => {
       const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback_secret');
 
       req.user = await User.findById(decoded.userId).select('-password');
+      
+      if (!req.user) {
+        res.status(401).json({ message: 'Not authorized, user not found' });
+        return;
+      }
 
       next();
     } catch (error) {
@@ -40,5 +45,13 @@ export const pharmacist = (req, res, next) => {
     next();
   } else {
     res.status(401).json({ message: 'Not authorized as a pharmacist' });
+  }
+};
+
+export const delivery = (req, res, next) => {
+  if (req.user && (req.user.role === 'delivery' || req.user.role === 'admin')) {
+    next();
+  } else {
+    res.status(401).json({ message: 'Not authorized as a delivery partner' });
   }
 };

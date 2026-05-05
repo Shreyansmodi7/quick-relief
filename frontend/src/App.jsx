@@ -9,6 +9,8 @@ import CartPage from './pages/CartPage.jsx';
 import CheckoutPage from './pages/CheckoutPage.jsx';
 import PharmacistDashboard from './pages/PharmacistDashboard.jsx';
 import UploadPrescriptionPage from './pages/UploadPrescriptionPage.jsx';
+import DeliveryDashboard from './pages/DeliveryDashboard.jsx';
+import ProfilePage from './pages/ProfilePage.jsx';
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/upload-prescription" element={<UploadPrescriptionPage />} />
             <Route path="/pharmacist/dashboard" element={<PharmacistDashboard />} />
+            <Route path="/delivery/dashboard" element={<DeliveryDashboard />} />
+            <Route path="/profile" element={<ProfilePage />} />
           </Routes>
         </main>
         <Footer />

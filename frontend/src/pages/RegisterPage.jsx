@@ -100,6 +100,7 @@ const RegisterPage = () => {
             >
               <option value="customer">Customer</option>
               <option value="pharmacist">Pharmacist</option>
+              <option value="delivery">Delivery Partner</option>
             </select>
           </div>
           <div className="mb-4">

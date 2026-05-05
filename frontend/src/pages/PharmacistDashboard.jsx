@@ -99,6 +99,7 @@ const PharmacistDashboard = () => {
                   <th className="p-4 font-semibold">Delivery Address</th>
                   <th className="p-4 font-semibold">Prescription</th>
                   <th className="p-4 font-semibold">Total</th>
+                  <th className="p-4 font-semibold">Payment</th>
                   <th className="p-4 font-semibold">Status</th>
                   <th className="p-4 font-semibold text-right">Actions</th>
                 </tr>
@@ -124,6 +125,11 @@ const PharmacistDashboard = () => {
                     </td>
                     <td className="p-4 font-semibold text-gray-900">${order.totalPrice.toFixed(2)}</td>
                     <td className="p-4">
+                      <span className={`text-sm font-bold ${order.isPaid ? 'text-green-600' : 'text-red-600'}`}>
+                        {order.isPaid ? 'Paid' : 'Unpaid'}
+                      </span>
+                    </td>
+                    <td className="p-4">
                       <span className={`px-3 py-1 rounded-full text-xs font-bold ${
                         order.status === 'Pending' ? 'bg-yellow-100 text-yellow-800' :
                         order.status === 'Out for Delivery' ? 'bg-blue-100 text-blue-800' :
@@ -138,10 +144,10 @@ const PharmacistDashboard = () => {
                         <button onClick={() => updateStatus(order._id, 'Accepted')} className="bg-primary-600 text-white px-3 py-1 rounded text-sm hover:bg-primary-700 mr-2">Accept</button>
                       )}
                       {order.status === 'Accepted' && (
-                        <button onClick={() => updateStatus(order._id, 'Out for Delivery')} className="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">Dispatch</button>
+                        <button onClick={() => updateStatus(order._id, 'Ready for Pickup')} className="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">Request Delivery</button>
                       )}
-                      {order.status === 'Out for Delivery' && (
-                        <button onClick={() => updateStatus(order._id, 'Delivered')} className="bg-green-600 text-white px-3 py-1 rounded text-sm hover:bg-green-700">Mark Delivered</button>
+                      {(order.status === 'Out for Delivery' || order.status === 'Ready for Pickup' || order.status === 'Accepted by Driver') && (
+                        <span className="text-gray-500 text-sm italic">Waiting for Driver</span>
                       )}
                     </td>
                   </tr>
